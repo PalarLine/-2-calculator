@@ -33,6 +33,7 @@ function resultTable(arrObjects) {
 function calculate (sumCredit, mRate, term) {
 
     let arrObjects = [];
+    let p = {};
     let amountPayment = 0;
     let amountInterestPayment = 0;
     let amountPrincipalPayment = 0;
@@ -63,7 +64,7 @@ function calculate (sumCredit, mRate, term) {
 
                     paymentForMonth = to2(monthlyPrincipalPayment +  monthlyInterestPayment);
                     
-                    let p = new parselCreator(month, sumCredit, monthlyPrincipalPayment, monthlyInterestPayment, paymentForMonth);
+                    p = new parselCreator(month, sumCredit, monthlyPrincipalPayment, monthlyInterestPayment, paymentForMonth);
                     
                     arrObjects.push(p);
 
@@ -72,8 +73,8 @@ function calculate (sumCredit, mRate, term) {
                     amountInterestPayment = to2(amountInterestPayment +  monthlyInterestPayment);
                                          
                     amountPrincipalPayment = to2(amountPrincipalPayment + monthlyPrincipalPayment); 
-               
-                    resultTable(arrObjects);
+                       
+                    
                 };
         } else {
             // Standard calculation
@@ -89,7 +90,7 @@ function calculate (sumCredit, mRate, term) {
                     
                     paymentForMonth = to2(monthlyPrincipalPayment + monthlyInterestPayment);
                     
-                    let p = new parselCreator(month, sumCredit, monthlyPrincipalPayment, monthlyInterestPayment, paymentForMonth);
+                    p = new parselCreator(month, sumCredit, monthlyPrincipalPayment, monthlyInterestPayment, paymentForMonth);
                         
                     arrObjects.push(p);
 
@@ -101,7 +102,6 @@ function calculate (sumCredit, mRate, term) {
                                 
                     sumCredit = to2(sumCredit - monthlyPrincipalPayment);  
                         
-                    resultTable(arrObjects);
                 }
         }
                
@@ -113,8 +113,11 @@ function calculate (sumCredit, mRate, term) {
                     finalPercentPayment.innerHTML = `${amountInterestPayment.toFixed(2)}`;
 
         let finalPayment = document.querySelector('.monthesPayment');
-                finalPayment.innerHTML = `${amountPayment.toFixed(2)}`;           
-}
+                finalPayment.innerHTML = `${amountPayment.toFixed(2)}`;  
+                
+        resultTable(arrObjects); 
+        console.log(arrObjects); 
+    }
 
     // Button click
     let resultBtn = document.querySelector('.btn');
